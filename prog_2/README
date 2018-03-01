@@ -1,0 +1,75 @@
+/*----------------------------------------------------------------------------*/
+/*NAME: Daniel Wagner                                         user: dkwagner  */
+/*DUE DATE: 03/02/2018 @ 11pm                                                 */
+/*PROGRAM ASSIGNMENT #2                                                       */
+/*FILE NAME: README                                                           */
+/*PROGRAM PURPOSE: Answer relevant questions about the program                */
+/*----------------------------------------------------------------------------*/
+
+1. The program first grabs all of the input from the file, and creates the
+shared memories required to hold the arrays. It then spawns the qsort process.
+Qsort then partitions the given array, and forks two child processes to handle
+each side of the partitioned section of the array. It then waits for these
+processes to complete before exiting. While this is occurring, the main process
+also spawns the merge process. The merge process creates a process for each
+element in both the x[] and y[] arrays, which handle placing that element in
+the correct position in the output array m[]. merge waits for these processes
+to finish before exiting. When both processes have exited the main process then
+prints each of their output arrays and deallocates the shared memories.
+
+PROCESS DIAGRAMS:
+
+    |-----qsort
+main-
+    |-----merge
+                                             |---qsort-- etc.
+                    |----qsort--partition()--
+qsort--partition()--                         |---qsort-- etc.
+                    |----qsort--etc.
+
+merge----x[0]       total of n+m child processes
+       |-...
+       |-x[n]
+       |
+       |-y[0]
+       |-...
+       |-y[m]
+
+
+2. The program works because all operations that are performed never edit the
+same element at the same time. They all perform operations on separate elements,
+meaning we can allocate a process to each element without any issues.
+
+3. I allocated 4 memory segments. 1 for quicksort, and 3 for merge.
+Quicksort:
+  Since the quicksort is performed inline, we can use the input array as the
+  output array.
+Merge:
+  I created three shared memories for merge. One for x[], one for y[] and one
+  for the output array m[]. The reason we cannot do this inline like quicksort,
+  is that merge requires us to take two arrays of any size and merge them
+  together into a single sorted output array. While we could allocate a long
+  array that is large enough for all three to fit into, it would be more
+  difficult to keep track of, and could lead to more bugs. Also, since each
+  element in the array must reference the other array, we cannot change values
+  in either array during searches to prevent race conditions.
+
+4. There are no potential race conditions in my program. There is never any
+instance of multiple processes trying to edit the position of an element in
+any array concurrently. In the specification, there is a chance for race
+conditions if you decide to try and put both x[] and y[] in the same array, and
+then merge them inline. This is due to the fact that the process of merging
+requires us to check the values of elements in either array, and if they were
+constantly changing there would be unpredictable behavior at best.
+
+5. I provide qsort with 4 arguments. The name of the program (required by c),
+the left bound, and right bound for the quicksort, and the overall size of the
+entire array. We need left and right since we call qsort multiple times for
+concurrent quicksorting, and we need to keep track of where we are supposed to
+be sorting. The overall size of the array is required for allocating and
+attaching the shared memory.
+
+6. I provide merge with 3 arguments. The name of the program (required by c),
+the size of x[], and the size of y[]. We use each of these sizes to allocate and
+attach the 3 shared memory segments required. Since m[] (the output array)
+is simply x.size + y.size, we don't pass this in the command line arguments. 
