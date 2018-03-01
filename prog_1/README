@@ -1,0 +1,45 @@
+/*-------------------------------------------------------*/
+/*NAME: Daniel Wagner			User ID: dkwagner*/
+/*DUE DATE: 02/12/2018					 */
+/*PROGRAM ASSIGNEMNT #1					 */
+/*FILE NAME: README					 */
+/*PROGRAM PURPOSE:					 */
+/*	The README is intended to demonstrate an academic*/
+/*	understanding of basic multi-process programming */
+/*-------------------------------------------------------*/
+
+1. This will create exactly 3 new processes. Each new process will be 
+a child of the previously created process. This happens because when checking 
+the return value of the fork() system call, we break out of the loop if we are
+the parent of the newly forked process. We then print out the process id, and 
+our parent id. 
+
+parent--->child1--->child2--->child3
+
+2. This can create at most 4 child processes, assuming that there are no
+issues when we try to fork(). Each child is a child the the original parent
+process. This happens because we break out of the loop when it is determined
+we are a child process, but the parent process continues on spawning more
+children until the loops completes.
+	/---->Child1
+	|---->Child2
+parent->|---->Child3	
+	\---->Child4
+
+3. This can create up to 7 child processes. (Assuming all the fork() calls
+are successful) Each process only checks to see if it failed, so it will 
+continue to spawn child processes until the loop is finished. 
+
+parent->|-Child1----->Child4----->Child7
+	|      |----->Child5
+	|
+	|-Child2----->Child6
+	|
+	|-Child3
+
+
+4. The reason for the number rolling back to 1.0 is that the 
+number eventually becomes so large that it overflows the unsigned
+long that was used to store the value. When an unsigned long 
+hits overflow in C specifically, the system handles it by defaulting
+to a value of 1.0.

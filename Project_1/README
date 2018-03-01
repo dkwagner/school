@@ -1,0 +1,87 @@
+README file for PROGRAM 1
+
+Question 1:
+	
+	DIAGRAM:
+		
+		    /--	Child 1
+	Parent---------	Child 2
+		    \--	Child 3
+	
+	EXPLANATION:
+	
+	argv[1] is equal to four,
+	and the for loop starts at
+	1 and checks against < 4.
+	In the loop, we check if 
+	the value returned by
+	fork() is 1, if so, 
+	we are now a child process,
+	we break out of the loop, 
+	and print our parent pid
+	along with our own. Then we
+	sleep. If the pid is not 1,
+	we are the parent process
+	and we continue to create 
+	more child processes until
+	the loop is finished. We then
+	print our parent pid (which is
+	1 since we are the parent 
+	process) and our own pid
+	(the same pid each of the 
+	3 child processes will print)
+	and then sleep and exit.
+
+Question 2:
+	
+DIAGRAM:
+	
+Parent----------Child----------Child------------Child-----------Child
+	
+Explanation:
+
+argv[1] is 4. The loop
+runs from 0 to i < 4. This
+means the loop will run 4 times.
+The first iteration, the parent will
+create a child. A pid of 0 denotes 
+a parent, so the parent breaks and
+prints its ppid and pid. The child pid
+is 1 so it continues the loop. It is
+now the parent of the newly created child
+process, and is now a parent. It breaks
+out of the loop and prints, while the
+new child continues the cycle. This
+continues until the loop is finished. 
+
+
+
+Question 3:
+
+DIAGRAM:
+
+						   
+			    /--	Child1-----------------	Child1
+	   ----	Child1---------	Child2----------------- Child1
+	   |		    
+	   |		    
+	   |
+	   |		    /--	Child1----------------- Child1
+Parent---------	Child2---------	Child2----------------- Child1
+	   |		    
+	   |		    
+           |		    /-- Child1----------------- Child1
+	   ---- Child3--------- Child2----------------- Child1
+
+EXPLANATION:
+
+argv[1] is 3, and the loop
+starts at 0 and goes to 3. 
+This means the loop will run 3 times.
+The for loop only breaks if a process
+is not successfully created. This means that
+every new child will make 1 less children than its parent
+for 3 iterations. We get a tree like structure, where
+the parent makes three children, children in tier
+1 will make 2 children each, and children in tier
+3 will make 1 child each. 

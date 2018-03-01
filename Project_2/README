@@ -1,0 +1,63 @@
+//-----------------------------------------------
+//NAME: Daniel Wagner		User ID: dkwagner
+//DUE DATE: 10/14/2016
+//PROGRAM ASSIGNMENT 2
+//FILE NAME: README
+//PROGRAM PURPOSE:
+//	Answer the required qestions for README
+//----------------------------------------------
+
+1.
+My program first creates all of the required variables for
+the program. It then reads in all of the required data from
+the given input file. After this it creates three shared 
+memory segments (one for each array), and then populates
+them with the correct data. After that it executes 
+the two child processes who each preform their operations 
+independently. Qsort continually partitions array A, then spawns 
+two new children, whom each do the same until the entire array is sorted.
+Merge creates a process for each element in x, and each process 
+searches for the correct position to place x in y, then
+inserts it.
+
+2.
+Qsort works since each child can work on its section of the 
+data concurrently since it cannot work on data another process
+is working on (because that only process would be its parent).
+Merge works because I spawn a process for the current index of
+x, then allow it to perform its search and add itself to the array
+before spawning the next process. This prevents race conditions from 
+occuring.
+
+3.
+I allocated a shared memory segement for each array that was input.
+However for array y, I added the size of array x to the size 
+of the array since I knew I would be adding all of the elements of 
+array x to array y. I then added all the values into each array as I
+read them in. I used array a for all of the processes on qsort
+as none of them can interact with the array in such a manner
+that they will confuse other processes. I simply provided merge
+with array x and y and allowed it to work.
+
+4.
+Yes, if you were to try and have all child processes of merge
+work at the same time, there is potential for them to mess each other
+up during the search and add processes. This is because the array must 
+remain "still" while you are searching through it, and if two
+processes are trying to insert a value at the same time, its very
+possible for them to interleave and cause problems, where neither process
+has an accurate idea of where it is in the array.
+
+5.
+First you establish all of the arguments you need for qsort. 
+The arguments in question being the left and right positions
+to partition between, the overall size of the array (for printing
+purposes), and the shared memory id of array a. I then used sprintf
+to place all of these arguments into character arrays, then place them into
+a char** and passed it as if it was argv.
+
+6.
+Similar to the qsort arguments, I established all of the arguments
+I needed, (ie waited until all of them were calculated or available),
+then used sprintf to place them into a char** and passed it as if it
+was argv.

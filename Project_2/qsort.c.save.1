@@ -1,0 +1,56 @@
+//-----------------------------------------------
+//NAME: Daniel Wagner		User ID: dkwagner
+//DUE DATE: 10/14/2016
+//PROGRAM ASSIGNMENT 2
+//FILE NAME: qsort.c
+//PROGRAM PURPOSE:
+//	Take in an unsorted array of integers and
+//	perform the quicksort algorithm on that
+// 	array. Continually spawn new child
+//	processes to handle each newly created 
+//	array until it is sorted using execvp()
+// 	system calls.
+//-----------------------------------------------
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/shm.h>
+
+void partition();
+
+int main(int argc, char** argv){
+	
+	// Declare required variables
+	int left, right, i, shmID, aSize;
+	int *shmPtrA;
+	pid_t pid;
+	key_t key;
+
+	// Get pid
+	pid = getpid();
+	
+	// pull in needed command line arguments
+	left = atoi(argv[1]);
+	right = atoi(argv[2]);
+	aSize = atoi(argv[3]);
+	shmID = atoi(argv[4]);
+	
+	// inform user process has entered after required info has been gathered
+	fprintf(stdout, "   ### Q-PROC(%d): entering with a[%d...%d}\n      ", (int) pid, left, right);
+
+	// attach shared memory to this process
+	shmPtrA = (int*) shmat(shmID, NULL, 0);
+
+	// Print the stored shared memory
+	for(i = 0; i < aSize; i ++){
+		fprintf(stdout, "%d ", shmPtrA[i]);
+	}
+	fprintf(stdout, "\n");
+
+	// Partition Section
+	
+
+	return 0;
+}
