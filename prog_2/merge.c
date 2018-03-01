@@ -19,8 +19,33 @@
 
 #define BUFFER_SIZE 256
 
+/*----------------------------------------------------------------------------*/
+/*FUNCTION: int merge(int index, int array, int xSize, int ySize, int *shmptrX*/
+/*                      int *shmPtrY, int *shmPtrM)                           */
+/*    Function performs a modified binary search to place the given element   */
+/*      correctly in the output array m[]                                     */
+/*PARAMETER USAGE:                                                            */
+/*    int index: index of element to place in output array                    */
+/*    int array: selector for which array to use                              */
+/*    int xSize: size of x[] array                                            */
+/*    int ySize: size of y[] array                                            */
+/*    int *shmPtrX: shared memory array for x[]                               */
+/*    int *shmPtrY: shared memory array for y[]                               */
+/*    int *shmPtrM: shared memory array for m[]                               */
+/*FUNCTION CALLED:                                                            */
+/*    getpid(), sprintf(), write(), strlen(), floor(), exit()                 */
+/*----------------------------------------------------------------------------*/
 int merge(int index, int array, int xSize, int ySize, int *shmPtrX, int *shmPtrY, int *shmPtrM);
 
+/*----------------------------------------------------------------------------*/
+/*FUNCTION: int main(int argc, char **argv)                                   */
+/*PARAMETER USAGE:                                                            */
+/*    int argc: number of command line arguments                              */
+/*    char **argv: command line arguments                                     */
+/*FUNCTION CALLED:                                                            */
+/*    getpid(), sprintf(), write(), strlen(), atoi(), ftok(), shmget(),       */
+/*    shmat(), fork(), wait(), exit(), shmdt(), merge()                       */
+/*----------------------------------------------------------------------------*/
 int main(int argc, char **argv){
 
   /* Variable Declarations */
@@ -79,6 +104,13 @@ int main(int argc, char **argv){
   for(i = 0; i < xSize + ySize; i ++){
     wait(&status);
   }
+
+  /* Detach shared memories */
+  shmdt(shmPtrX);
+  shmdt(shmPtrY);
+  shmdt(shmPtrM);
+
+  /* Exit gracefully */
   exit(0);
 }
 

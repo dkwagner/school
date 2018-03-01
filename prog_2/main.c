@@ -18,6 +18,19 @@
 
 #define BUFFER_SIZE 256
 
+/*----------------------------------------------------------------------------*/
+/*FUNCTION: int main(int argc, char **argv)                                   */
+/*    This is the main function of the program. It reads in all command line  */
+/*    arguments and places them in their correct arrays. It then is           */
+/*    responsible for creating child processes to sort the data. It then      */
+/*    manages the shared memory segments and makes sure they get removed.     */
+/*PARAMETER USAGE:                                                            */
+/*    int argc: Number of command line arguments                              */
+/*    char **argv: Command line arguments                                     */
+/*FUNCTION CALLED:                                                            */
+/*    scanf(), sprintf(), write(), ftok(), shmget(), shmat(), strlen(),       */
+/*    printf(), execvp(), fork(), wait(), exit(), shmdt(), shmctl(), sizeof() */
+/*----------------------------------------------------------------------------*/
 int main(int argc, char **argv){
   /* Create the character buffer for sprintf */
   char buf[BUFFER_SIZE];

@@ -25,11 +25,23 @@
 /*PARAMETER USAGE:                                                            */
 /*    int left: left bound of array to partition                              */
 /*    int right: right bound of array to partition                            */
+/*    int *shmptr: pointer to the array to sort                               */
 /*FUNCTION CALLED:                                                            */
 /*    none                                                                    */
 /*----------------------------------------------------------------------------*/
 int partition(int left, int right, int *shmptr);
 
+/*----------------------------------------------------------------------------*/
+/*FUNCTION: int main(int argc, char **argv)                                   */
+/*    Repsonsible for creating and managing the child processes to quicksort  */
+/*    the given array.                                                        */
+/*PARAMETER USAGE:                                                            */
+/*    int argc: number of command line arguments                              */
+/*    char **argv: command line arguments                                     */
+/*FUNCTION CALLED:                                                            */
+/*    sprintf(), write(), strlen(), atoi(), getpid(), ftok(), shmget(),       */
+/*    shmat(), shmdt(), partition(), sizeof(), wait()                         */
+/*----------------------------------------------------------------------------*/
 int main(int argc, char **argv){
 
   /* Variable Declarations */
