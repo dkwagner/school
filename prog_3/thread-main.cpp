@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include "thread.h"
+#include "ThreadClass.h"
 
 using namespace std;
 
