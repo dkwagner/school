@@ -22,10 +22,17 @@ using namespace std;
 // FUNCTION CALLED:
 //------------------------------------------------------------------------------
 int main(){
+  cout << "Concurrent Even-Odd Sort\n\n";  // Signal Program beginning
+
+  // Define variables
   int length, temp, i;
   cin >> length;  // Read in the length of the array
-  int arr[length];  // Define the array
 
+  int arr[length];  // Define the array
+  cout << "Number of input data = " << length << "\n";
+  cout << "Input Array: \n\t";
+
+  // Read in array
   for(i = 0; i < length; i ++){
     cin >> arr[i];
     cout << arr[i] << " ";
