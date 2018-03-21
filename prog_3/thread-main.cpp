@@ -27,6 +27,7 @@ int main(){
 
   // Define variables
   int length, temp, i;
+  bool swapped = true;
   cin >> length;  // Read in the length of the array
 
   int arr[length];  // Define the array
@@ -39,5 +40,10 @@ int main(){
     cout << arr[i] << " ";
   }
   cout << "\n";
+
+  Pass* pass = new Pass(1, 2, arr, swapped, 1);
+  pass->Begin();
+  pass->Join();
+  Exit();
 
 }

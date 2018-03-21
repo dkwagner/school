@@ -21,8 +21,31 @@ using namespace std;
 // FUNCTION CALLED:
 //
 //------------------------------------------------------------------------------
-Pass::Pass(int l, int r, int a[]){
+Pass::Pass(int l, int r, int a[], bool s, int n){
   left = l;
   right = r;
   arr = a;
+  swapped = s;
+  ThreadName = n;
+
+}
+
+//------------------------------------------------------------------------------
+// FUNCTION:
+//
+// PARAMETER USAGE:
+//
+// FUNCTION CALLED:
+//
+//------------------------------------------------------------------------------
+void Pass::ThreadFunc(){
+  Thread::ThreadFunc();  // Thread Mentor required line
+
+  // Variable Declarations
+  char spacing[9] = "        ";
+
+  // Declare thread as created
+  cout << spacing << "Thread " << ThreadName << " created\n";
+
+  Exit();
 }
