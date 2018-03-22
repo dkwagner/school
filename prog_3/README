@@ -1,0 +1,37 @@
+//------------------------------------------------------------------------------
+// NAME: Daniel Wagner                                      User Id: dkwagner
+// DUE DATE: 03/23/2018
+// Program Assignment #3
+// FILE NAME: README
+// PROGRAM PURPOSE:
+//  Demonstrate a working knowledge of the problem and threads
+//------------------------------------------------------------------------------
+
+1. There are no race conditions in the program. The array is accessed
+concurrently, but since no two elements in the array are ever changed at the
+same time by two different threads (due to the even odd pass system) no race
+conditions can occur. The swapped boolean that is set by the threads could
+technically be interacted with at the same time by multiple threads, but since
+threads only ever set it to true, no race conditions occur since the output is
+always the same.
+
+2.
+
+3. No. Even and Odd passes could potentially access the same element and try
+to change it at the same time if done this way. A way to make this work would be
+to create a semaphore and only allow one thread at a time to swap elements.
+If done this way, it is possible for a thread to compare two elements, get into
+the queue to wait to swap, and have the elements it originally intended to swap
+change before it gets its chance to perform a swap. So you would need to perform
+another check during the critical section to confirm that the two elements
+should actually be swapped. This would not be very efficient and would only
+allow threads to swap one at a time compared to the current implementation which
+allows multiple swaps to occur at once.
+
+4. This would save time on creating and joining threads, however, it is also
+possible that you may not need to do more than one even and odd pass. (The
+array is already sorted or very close to sorted), and this would actually waste
+time in the long run. If you were to implement it in this way you could just
+have each thread perform the even and odd pass and use semaphores like in the
+previous answer to allow one thread make swaps at a time. This would still not
+be the most efficient solution but it would work within the given constraints. 

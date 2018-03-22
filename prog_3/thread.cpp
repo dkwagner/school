@@ -15,11 +15,15 @@ using namespace std;
 
 //------------------------------------------------------------------------------
 // FUNCTION:
-//
+//  Constructor for Pass::Pass, intializes all variables
 // PARAMETER USAGE:
-//
+//  int i: Index to examine
+//  a[]: array to perform check on
+//  bool* s: Pointer to the boolean used in thread-main.cpp to determine if a
+//          swap has occured
+//  int n: Integer used to name the thread
 // FUNCTION CALLED:
-//
+//  n/a
 //------------------------------------------------------------------------------
 Pass::Pass(int i, int a[], bool* s, int n){
   index = i;
@@ -37,7 +41,7 @@ Pass::Pass(int i, int a[], bool* s, int n){
 // PARAMETER USAGE:
 //  n/a
 // FUNCTION CALLED:
-//
+//  cout, Exit()
 //------------------------------------------------------------------------------
 void Pass::ThreadFunc(){
   Thread::ThreadFunc();  // Thread Mentor required line

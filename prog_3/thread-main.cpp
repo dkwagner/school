@@ -21,6 +21,7 @@ using namespace std;
 // PARAMETER USAGE:
 //    n/a
 // FUNCTION CALLED:
+//  cin, cout, Pass->Begin(), Pass->Join(), Exit()
 //------------------------------------------------------------------------------
 int main(){
   cout << "Concurrent Even-Odd Sort\n\n";  // Signal Program beginning
@@ -89,6 +90,13 @@ int main(){
     cout << "\n";
 
   }
+
+  // Print final result array
+  cout << "\nFinal Result after Iteration: " << iteration << ": \n  ";
+  for(i = 0; i < length; i ++){
+    cout << arr[i] << " ";
+  }
+  cout << "\n";
 
   // Exit function for ThreadMentor purposes
   Exit();
