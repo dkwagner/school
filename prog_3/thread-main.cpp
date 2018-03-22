@@ -32,7 +32,7 @@ int main(){
 
   int arr[length];  // Define the array
   cout << "Number of input data = " << length << "\n";
-  cout << "Input Array: \n\t";
+  cout << "Input Array: \n  ";
 
   // Read in array
   for(i = 0; i < length; i ++){
@@ -41,7 +41,7 @@ int main(){
   }
   cout << "\n";
 
-  Pass* pass = new Pass(1, 2, arr, swapped, 1);
+  Pass* pass = new Pass(1, arr, swapped, 1);
   pass->Begin();
   pass->Join();
   Exit();
