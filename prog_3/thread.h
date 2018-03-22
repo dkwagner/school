@@ -13,12 +13,12 @@
 class Pass : public Thread
 {
   public:
-    Pass(int i, int a[], bool s, int n);
+    Pass(int i, int a[], bool* s, int n);
   private:
     int index;
     int temp;
     int ThreadName;
     int *arr;
-    bool swapped;
+    bool* swapped;
     void ThreadFunc();
 };

@@ -21,7 +21,7 @@ using namespace std;
 // FUNCTION CALLED:
 //
 //------------------------------------------------------------------------------
-Pass::Pass(int i, int a[], bool s, int n){
+Pass::Pass(int i, int a[], bool* s, int n){
   index = i;
   arr = a;
   swapped = s;
@@ -57,7 +57,7 @@ void Pass::ThreadFunc(){
     temp = arr[index - 1];
     arr[index - 1] = arr[index];
     arr[index] = temp;
-    swapped = true;
+    *swapped = true;
     cout << spacing << "Thread " << ThreadName << " swaps x[" << index - 1 << "] and x[" << index << "]\n";
   }
 
